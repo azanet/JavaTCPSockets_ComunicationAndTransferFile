@@ -14,13 +14,13 @@ public class OBJFileSubmission implements Serializable{
         public String nombreFichero = "";
 
         /**
-         * Si este es el �ltimo mensaje del fichero en cuesti�n o hay m�s
-         * despu�s
+         * Si este es el ultimo mensaje del fichero en cuestion o hay mas
+         * despues
          */
         public boolean ultimoMensaje = true;
 
         /**
-         * Cuantos bytes son v�lidos en el array de bytes
+         * Cuantos bytes son validos en el array de bytes
          */
         public int bytesValidos = 0;
 
@@ -30,7 +30,7 @@ public class OBJFileSubmission implements Serializable{
         public byte[] contenidoFichero = new byte[LONGITUD_MAXIMA];
 
         /**
-         * N�mero m�ximo de bytes que se envia�n en cada mensaje
+         * Numero maximo de bytes que se envian en cada mensaje
          */
         public final static int LONGITUD_MAXIMA = 1024;
 }
