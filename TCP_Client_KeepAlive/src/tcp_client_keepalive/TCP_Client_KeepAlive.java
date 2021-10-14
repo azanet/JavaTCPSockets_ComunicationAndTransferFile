@@ -3,7 +3,6 @@ package tcp_client_keepalive;
 import Utils.ReadWriteUtils;
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.net.ConnectException;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -21,7 +20,7 @@ import java.util.logging.SimpleFormatter;
  */
 public class TCP_Client_KeepAlive {
 
-//Creamos el Logger
+//CREANDO EL Logger y Handler
     final static Logger LOG = Logger.getLogger("tcp_client_keepalive.Tcp_Client_Keepalive");
 //Vinculando el Logger a un ARCHIVO "log" para que almacene las salidas que deseemos
 //Creamos un Handler del archivo donde queremos Almacenar los mensajes
@@ -29,19 +28,15 @@ public class TCP_Client_KeepAlive {
 //Para los TXT, debemos crear un "Formatter" para formatear el texto
     static SimpleFormatter formatterTxt = new SimpleFormatter();
 ////////////////////////////////////////////////////////////////////////////
-    
-    
-     
-        /*Haciendo para Obtener la Ruta (en cualquier SO) 
-        / de donde tenemos que leer el Archivo .txt*/
-        final static String nameJAR = TCP_Client_KeepAlive.class.getSimpleName()+".jar";
-        final static String jarPath = (new File(TCP_Client_KeepAlive.class.getProtectionDomain().getCodeSource().getLocation().getPath())).toString().replaceAll(nameJAR, "");               
-        //Ruta donde se debe encontrar el Archivo a LEER
-        final static String routePath = jarPath;
-    
-    
-    
 
+    /*Obteniendo la Ruta (en cualquier SO) de donde tenemos que leer el Archivo .txt*/
+    final static String routeFile = TCP_Client_KeepAlive.class.getSimpleName() + ".jar";
+    final static String jarPath = (new File(TCP_Client_KeepAlive.class.getProtectionDomain().getCodeSource().getLocation().getPath())).toString().replaceAll(routeFile, "");
+    //Ruta donde se debe encontrar el Archivo a LEER
+    final static String routePath = jarPath;
+
+ ///////////////////////////////////////////////////////////////   
+    //Configurando SOCKET de CLIENTE
     final static int PORT = 51000;
     final static String HOST = "localhost";
     private static Socket socket;
@@ -59,35 +54,32 @@ public class TCP_Client_KeepAlive {
         System.out.println("\n\n\t\tDEMO\nEJECUTAR DESDE LA CONSOLA PARA SU CORRECTO FUNCIONAMIENTO\n\n");
         
         try {
-            
             //Cuidado que el LOG se SOBREESCRIBE, 
-            //establecer nombre nuevo(por ejemplo con fecha y hora) cada vez
+        //establecer nombre nuevo(por ejemplo con fecha y hora) cada vez
             
-            //Le aplicamos el "formatter" al "Handler"
-            fileTxt = new FileHandler(routePath+"InformationLog.log");
+            //Le aplicamos el "formatter" al "Handler" para que escriba correctamente el TXT
+            fileTxt = new FileHandler(routePath + "InformationLog.log");
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, ex.getMessage());
         } catch (Exception ex) {
             LOG.severe(ex.getMessage());
         }
-    //Aplicamos formato al Handler   
-    fileTxt.setFormatter (formatterTxt);
-    //Y vinculamos el "Logger" al fichero
-    LOG.addHandler(fileTxt);
-    //Probando el "logger"
-
-    LOG.info("PROBANDO EL LOGGERRRR");
+        
+        //Aplicamos formato al Handler   
+        fileTxt.setFormatter(formatterTxt);
+        
+        //Y vinculamos el "Logger" al fichero
+        LOG.addHandler(fileTxt);
+        
+        //PROBANDO el "logger"!!!!!!!!!!
+        LOG.info("PROBANDO EL LOGGERRRR");
     
         enviarMensajesAlServidor();
 
     }
 
     private static void enviarMensajesAlServidor() {
-//Componemos el nombre del archivo a buscar,
-        
 
-        
-        
         try {
             socket = new Socket(HOST, PORT);
 
@@ -99,7 +91,7 @@ public class TCP_Client_KeepAlive {
                 System.out.println("Escribe algo: ");
 
                 linea = sc.nextLine();
-
+                
                 //Si el mensaje CONTIENE ALGO, lo Enviamos
                 if (linea.length() > 0) {
                     //==> //////ENVIANDO -STRING(mensaje)- AL SERVIDOR///                  

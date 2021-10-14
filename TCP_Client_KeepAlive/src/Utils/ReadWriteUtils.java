@@ -85,12 +85,15 @@ import java.util.logging.Logger;
 public class ReadWriteUtils {
 
     /**
-   * -REALIZANDO la "CREACION" DEL FICHERO-
+   * REALIZANDO la "CREACION" DEL FICHERO.
    * 
-   * @param filePath
-   *  @return state  ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+   * @param filePath {Nombre y Ruta de Archivo a CREAR}
+   *  @return boolean - {TRUE(Si la ioperacion salio BIEN) || FALSE(Si la operacion salio mal)}
    */
-   public boolean createNewFILE(String filePath) {
+    public boolean createNewFILE(String filePath) {
+        return createNewFILE_p(filePath);
+    }   
+    private boolean createNewFILE_p(String filePath) {
         
         boolean state = false;
         try {
@@ -113,12 +116,15 @@ public class ReadWriteUtils {
    
    
    /**
-    * -REALIZANDO EL "Eliminado" DEL FICHERO-
+    * REALIZANDO EL "Eliminado" DEL FICHERO.
     * 
-     * @param filePath
-    *  @return state  ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+    * @param filePath {Nombre y Ruta de Archivo a DELETE}
+    * @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
     */
     public boolean deleteFILE(String filePath) {
+       return deleteFILE_p(filePath);
+    }
+    private boolean deleteFILE_p(String filePath) {
         
         boolean state = false;       
         File file = new File(filePath);     
@@ -137,12 +143,16 @@ public class ReadWriteUtils {
     
     
    /**
-    * -REALIZANDO EL "reseteo" DEL FICHERO-
+    * REALIZANDO EL "reseteo" DEL FICHERO.
     * 
-    * @param filePath
-    *  @return state  ===> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+    * @param filePath {Nombre y Ruta de Archivo a RESETEAR}
+    * @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
     */ 
+    
     public boolean resetFILE(String filePath) {
+        return resetFILE_p(filePath);     
+    }
+    private boolean resetFILE_p(String filePath) {
         //
         boolean state = false;
         try {
@@ -168,12 +178,15 @@ public class ReadWriteUtils {
     
     
    /**
-    * -REALIZANDO EL "reseteo o Creacion" DEL FICHERO-
+    * REALIZANDO EL "reseteo o Creacion" DEL FICHERO.
     * 
-    * @param filePath
-    *  @return state      ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+    * @param filePath {Nombre y Ruta de Archivo a CREAR o RESETEAR}
+    * @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
     */    
     public boolean resetOrCreateFILE(String filePath) {
+        return resetOrCreateFILE_p(filePath);
+    }
+    private boolean resetOrCreateFILE_p(String filePath) {
         
         boolean state = false;
         try {
@@ -200,13 +213,16 @@ public class ReadWriteUtils {
     
     
     /**
-    * -Hacer una copia exacta de "Fichero de Entrada" a "Fichero de salida"-
+    * Hacer una copia exacta de "Fichero de Entrada" a "Fichero de salida".
     * 
-    * @param pathFileIN   ===> Fichero del que leemos el contenido que queremos COPIAR
-    * @param pathFileOUT  ===> Fichero al que se COPIARA el CONTENIDO Leido
-    *  @return state   ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+    * @param pathFileIN {Fichero del que LEEMOS el contenido que queremos COPIAR}
+    * @param pathFileOUT {Fichero al que se COPIARA el CONTENIDO Leido}
+    * @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
     */
     public boolean copyFile (String pathFileIN, String pathFileOUT) {
+        return copyFile_p(pathFileIN,pathFileOUT);    
+    }
+    private boolean copyFile_p(String pathFileIN, String pathFileOUT) {
         
         boolean state = false;
         RandomAccessFile FileOriginal = null;
@@ -258,13 +274,16 @@ public class ReadWriteUtils {
     
     
     /**
-    * -Agregar contenido de "Fichero de Entrada" a "Fichero de salida"
+    * Agregar contenido de "Fichero de Entrada" a "Fichero de salida".
     * 
-    * @param pathFileIN   ===> Fichero del que leemos el contenido que queremos Agregar
-    * @param pathFileOUT  ===> Fichero al que se le agregará el CONTENIDO Leido
-    *  @return state      ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+    * @param pathFileIN {Fichero del que LEEMOS el contenido que queremos Agregar}
+    * @param pathFileOUT {Fichero al que se AGREGA el CONTENIDO Leido}
+    * @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
     */
-    public boolean addContentFROMFileIN_ToFileOUT (String pathFileIN, String pathFileOUT) {
+    public boolean addContentFROMFileIN_ToFileOUT(String pathFileIN, String pathFileOUT) {
+        return addContentFROMFileIN_ToFileOUT_p(pathFileIN, pathFileOUT);     
+    }
+    private boolean addContentFROMFileIN_ToFileOUT_p(String pathFileIN, String pathFileOUT) {
         
         boolean state = false;
         RandomAccessFile FileOriginal = null;
@@ -308,13 +327,17 @@ public class ReadWriteUtils {
 
     
     /**
-     * -LEE ARCHIVO Y LO IMPRIME POR PANTALLA-
+     * LEE ARCHIVO Y LO IMPRIME POR PANTALLA.
      * 
-     * @param filePath 
+     * @param filePath {Archivo a LEER}
+     * @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
      */
-    public void readFileAndPrint(String filePath) {
+    public boolean readFileAndPrint(String filePath) {
+        return readFileAndPrint_p(filePath);      
+    }
+    private boolean readFileAndPrint_p(String filePath) {
         
-   
+        boolean state = false;
         RandomAccessFile file =null;
 //        FileLock fileLock = null;
         BufferedReader reader = null;
@@ -345,7 +368,8 @@ public class ReadWriteUtils {
             
             //Imprimimos los DATOS por consola.
             System.out.println(data);
-      
+            state = true;
+            
         } catch (IOException e) {
             
          //   System.out.println("IO Exception\n"+e.getMessage());
@@ -377,6 +401,9 @@ public class ReadWriteUtils {
             System.gc(); 
             
         }//Fin del Finally
+        
+        return state;
+        
     }//FIN de ReadFileAndPrint
     
     
@@ -384,12 +411,15 @@ public class ReadWriteUtils {
     
     
     /**
-    * -LEE ARCHIVO Y LO RETORNA EN UNA STRING- 
+    * LEE ARCHIVO Y LO RETORNA EN UNA STRING.
     * 
-    * @param filePath
-    * @return 
+    * @param filePath {Archivo a LEER}
+    * @return String - {Retorna una STRING con todo el contenido del archivo}
     */
     public String readFileToString(String filePath) {
+        return readFileToString_p(filePath);       
+    }
+    private String readFileToString_p(String filePath) {
                
         RandomAccessFile file =null;
 //        FileLock fileLock = null;
@@ -452,12 +482,17 @@ public class ReadWriteUtils {
 
     
      /**
-     * -LEE ARCHIVO Y LO RETORNA EN UN ArrayList-
+     * LEE ARCHIVO Y LO RETORNA EN UN ArrayList&lt;String&gt; de STRINGS.
      * 
-     * @param filePath 
-     * @return  ==> ArrayList<String>
+     * Cada linea se almacenara en una posicion.
+     * 
+    * @param filePath {Archivo a LEER}
+    * @return ArrayList&lt;String&gt; - {Retorna un ARRAYLIST de STRING con todo el contenido del archivo}
      */
     public ArrayList<String> readFileToArrayList(String filePath) {
+        return readFileToArrayList_p(filePath);
+    }
+    private ArrayList<String> readFileToArrayList_p(String filePath) {
         
         RandomAccessFile file =null;
 //        FileLock fileLock = null;
@@ -526,12 +561,17 @@ public class ReadWriteUtils {
       
     
     /**
-    * -LEE UN OBJETO de un Archivo(Binario)- 
+    * Lee un objeto GENERICO de un archivoBinario y lo retorna.             
     * 
-    * @param filePath ==> Archivo de Lectura
-    * @return ==> Object
+    * (DEBERA CASTEARSE EN SU SALIDA al Objeto que deseemos).
+    * 
+    * @param filePath {Archivo de Lectura}
+    * @return Object - {Retorna un OBJETO Generico}
     */
     public Object readUniqueObjectFromFILE(String filePath) {
+        return readUniqueObjectFromFILE_p(filePath);
+    }
+    private Object readUniqueObjectFromFILE_p(String filePath) {
 
         Object object = null;
         ObjectInputStream readerObject = null;
@@ -590,13 +630,18 @@ public class ReadWriteUtils {
     
 
    /**
-    *         -LEE VARIOS OBJETOS de un Archivo(Binario)- 
-    * -y los Retorna en un ArrayList<Object> de OBJETOS GENERICOS-
+    * LEE VARIOS OBJETOS de un Archivo(Binario) y 
+    * los Retorna en un ArrayList&lt;Object&gt; de OBJETOS GENERICOS.
     * 
-    * @param filePath ==> Archivo de Lectura
-    * @return ==> ArrayList<Object>
+    * (DEBERA CASTEARSE EN SU SALIDA al Objeto que deseemos).
+    * 
+    * @param filePath {Archivo a LEER}
+    * @return ArrayList&lt;Object&gt; - {Array de Objetos contenidos en el archivo}
     */
     public ArrayList<Object> readSeveralObjectFromFILE(String filePath) {
+        return readSeveralObjectFromFILE_p(filePath);
+    }
+    private ArrayList<Object> readSeveralObjectFromFILE_p(String filePath) {
 
         ArrayList<Object> objectList = new ArrayList<>();//Array que contendrá todos los OBJETOS LEIDOS
         Object object = null;
@@ -661,13 +706,16 @@ public class ReadWriteUtils {
 
     
     /**
-     * -Escribir STRING en un ARCHIVO-
+     * Escribir STRING en un ARCHIVO.
      * 
-    * @param filePath
-    * @param message
-    *  @return state      ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+    * @param filePath {Archivo a AGREGAR Texto}
+    * @param message {Texto que se desea Agregar Al Archivo}
+    *  @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
     */
     public boolean writeTextInFile(String filePath, String message){
+        return writeTextInFile_p(filePath, message);
+    }
+    private boolean writeTextInFile_p(String filePath, String message){
  
         boolean state = false;
         RandomAccessFile file = null;
@@ -722,14 +770,19 @@ public class ReadWriteUtils {
     
     
    /**
-    * Escribe UN UNICO OBJETO en el ARCHIVO (Borra el Archivo Si existe, y crea uno nuevo)
-    * El archivo solo contendrá dicho objeto
+    * Escribe UN UNICO OBJETO en el ARCHIVO.
+    * (Borra el Archivo Si existe, y crea uno nuevo).
     * 
-    * @param filePath
-    * @param OBJ
-    *  @return state      ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+    * El archivo solo contendrá dicho objeto.
+    * 
+    * @param filePath {Archivo a ESCRIBIR el Objedto}
+    * @param OBJ {Objeto a ESCRIBIR en el Archivo}
+    * @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
     */
     public boolean writeUniqueObjectInFile(String filePath, Object OBJ) {
+        return writeUniqueObjectInFile_p(filePath, OBJ);  
+    }
+    private boolean writeUniqueObjectInFile_p(String filePath, Object OBJ) {
         
         boolean state = false;
         ByteArrayOutputStream objectBytes = null;
@@ -802,11 +855,14 @@ public class ReadWriteUtils {
    /**
     * -Escribe Agrega OBJETOS en el ARCHIVO Existente (El archivo contiene VARIOS("N") OBJETOS)-
     * 
-    * @param filePath
-    * @param OBJ
-    * @return state      ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+    * @param filePath {Archivo a ESCRIBIR el Objedto}
+    * @param OBJ {Objeto a ESCRIBIR en el Archivo}
+    * @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
     */
     public boolean writeSeveralObjectInFile(String filePath, Object OBJ) {
+        return writeSeveralObjectInFile_p(filePath, OBJ);    
+    }
+    private boolean writeSeveralObjectInFile_p(String filePath, Object OBJ) {
   
         boolean state = false;
         ByteArrayOutputStream objectBytes = null;
@@ -891,20 +947,21 @@ public class ReadWriteUtils {
 //#####################################################################
     
     /**
-     * -Lee Flujo de BYTES y devuelve STRING Codificada en UTF8-
+     * Lee Flujo de BYTES y devuelve STRING Codificada en UTF8.
      * 
      * Este método RECIBE un InputStream, Leerá la entrada de BYTES
      * proporcionada por el InputStream y DEVOLVERÁ una STRING codificada en
      * UTF8
      *
-     * LEERA UNA SOLA LINEA
+     * LEERA UNA SOLA LINEA.
      *
-     * @param inputStream ====> InputStream del Socket o Consola
-     *
-     * @return message ========> RETORNA una string con TODO el MENSAJE recibido
-     *
+     * @param inputStream {InputStream del Socket o Consola}
+     * @return String - {RETORNA una string con TODO el MENSAJE recibido}
      */
     public String readOneLine(InputStream inputStream) {
+        return readOneLine_p(inputStream);      
+    }
+    private String readOneLine_p(InputStream inputStream) {
 
         String message = "";
 
@@ -950,26 +1007,48 @@ public class ReadWriteUtils {
     
  
     /**
-     * -Lee Flujo de BYTES(lineas) hasta recibir Linea VACIA-
-     *    -y RETORNA TODO en una STRING Codificado en UTF8-
+     * Lee Flujo de BYTES(lineas) hasta recibir Linea VACIA
+     * y RETORNA TODO en una STRING Codificado en UTF8.
      * 
      * Este método RECIBE un InputStream, Leerá la entrada de BYTES
      * proporcionada por el InputStream y DEVOLVERÁ una STRING con TODO el
-     * MENSAJE codificada en UTF8;
+     * MENSAJE codificada en UTF8.
      *
-     * NECESITA RECIBIR UNA LINEA VACÍA("") PARA DETERMINAR QUE ES EL FINAL; 
-     * Si no la recibe, se quedará esperando El mensaje para siempre, sin retornar;
+     * NECESITA RECIBIR UNA LINEA VACÍA("") PARA DETERMINAR QUE ES EL FINAL. 
+     * Si no la recibe, se quedará esperando El mensaje para siempre, sin retornar.
      *
-     * SE PUEDE cambiar "END_OF_MESSAGE" para determinar EL FIN DEL MENSAJE.
-     *
-     * @param inputStream ====> InputStream del Socket o Consola
-     *
-     * @return message ========> RETORNA una string con TODO el MENSAJE recibido
+     * @param inputStream {InputStream del Socket o Consola}
+     * @return String - {RETORNA una string con TODO el MENSAJE recibido}
      */
-    public String readAllLines(InputStream inputStream) {
+     public String readAllLines(InputStream inputStream) {
+      // String END_OF_MESSAGE = "";
+         return readAllLines_p(inputStream, "");
+     }
+    
+     /**
+     * Lee Flujo de BYTES(lineas) hasta recibir Linea VACIA
+     * y RETORNA TODO en una STRING Codificado en UTF8.
+     * 
+     * Este método RECIBE un InputStream, Leerá la entrada de BYTES
+     * proporcionada por el InputStream y DEVOLVERÁ una STRING con TODO el
+     * MENSAJE codificada en UTF8.
+     *
+     * NECESITA RECIBIR UNA LINEA VACÍA("") PARA DETERMINAR QUE ES EL FINAL. 
+     * Si no la recibe, se quedará esperando El mensaje para siempre, sin retornar.
+     *
+     * INDICAR el "END_OF_MESSAGE" para determinar 
+     * "QUE QUEREMOS QUE ENTIENDA" como EL FIN DEL MENSAJE.
+     *
+     * @param inputStream {InputStream del Socket o Consola}
+     * @param END_OF_MESSAGE {Establecer un "Final de mensaje" Personalizado}
+     * @return String - {RETORNA una string con TODO el MENSAJE recibido}
+     */
+    public String readAllLines(InputStream inputStream, String END_OF_MESSAGE) {
+        return readAllLines_p(inputStream, END_OF_MESSAGE);
+    }  
+    private String readAllLines_p(InputStream inputStream, String END_OF_MESSAGE) {
 
         
-        String END_OF_MESSAGE = ""; //VARIABLE que Determina el "FIN DEL MENSAJE"
         String message = ""; //Mensaje a Retornar
         BufferedReader readerMessage = null; 
 
@@ -990,11 +1069,9 @@ public class ReadWriteUtils {
                 if (!(aux = readerMessage.readLine()).equals(END_OF_MESSAGE)) {
 
                     message += "\n";
-                }
-                
+                }               
             }//Fin del While
-
-            
+          
        } catch (NullPointerException npe) {
             String err=("\n[!]ERROR Null Pointer Exception\n--InputStream NULL");
             Logger.getLogger(ReadWriteUtils.class.getName()).severe(err);
@@ -1023,19 +1100,19 @@ public class ReadWriteUtils {
     
     
     /**
-     * -Leer OBJETOS del InputStream-
+     * Leer OBJETOS del InputStream.
      * 
      * Este método recibe un InputStream, Lee la entrada el Flujo proporcionada
      * por el InputStream y lo convierte a un OBJETO tipo "Object", el cual
      * RETORNA, Listo para ser CASTEADO en el objeto DEBIDO.
      *
-     *
-     * @param inputStream ====> Recibe un InputStream el cual leerá.
-     *
-     * @return ======> Retorna un "Object"
-     *
+     * @param inputStream {Recibe un InputStream el cual leerá}
+     * @return Object - {Retorna un OBJETO Generico}
      */
     public Object readObject(InputStream inputStream) {
+        return readObject_p(inputStream);       
+    }
+    private Object readObject_p(InputStream inputStream) {
 
         Object obj = null;
         ObjectInputStream readObject = null;
@@ -1073,19 +1150,23 @@ public class ReadWriteUtils {
     
     
     /**
-     * -Escribir/Enviar STRING en BYTES-
+     * Escribir/Enviar STRING en BYTES.
      * 
      * Este método recibe un OutputStream, Y una STRING(mensaje);
      *
      * Recibe una STRING(la codifica en utf8) y la envia
      * por el OutputStream una cadena de BYTES.
      *
-     * @param outputStream ====> OutputStream del Socket o Consola
-     * @param message =========> Mensaje que se necesita ENVIAR.
-     *
+     * @param outputStream {OutputStream del Socket o Consola}
+     * @param message - {Mensaje que se necesita ENVIAR}
+     * @return boolean - {TRUE(Si la ioperacion salio BIEN) || FALSE(Si la operacion salio mal)}
      */
-    public void writeMessage(OutputStream outputStream, String message) {
+    public boolean writeMessage(OutputStream outputStream, String message) {
+        return writeMessage_p(outputStream, message);       
+    }
+    private boolean writeMessage_p(OutputStream outputStream, String message) {
 
+        boolean state = false;
         BufferedWriter writerMessage=null;
 
         try {
@@ -1098,7 +1179,8 @@ public class ReadWriteUtils {
 
             writerMessage.newLine(); //O Tambien se puede enviar un salto de linea  "writeMessage.write("\n")"   
             
-
+            state=true;
+            
         } catch (NullPointerException npe) {
             String err=("\n[!]ERROR Null Pointer Exception\n--InputStream NULL");
             Logger.getLogger(ReadWriteUtils.class.getName()).severe(err);
@@ -1125,34 +1207,40 @@ public class ReadWriteUtils {
             writerMessage = null;
             System.gc();
         }
+        
+        return state;
     }
 
 
     
     
     /**
-     * -Enviar OBJETOS por el OutputStream-
+     * Enviar OBJETOS por el OutputStream.
      * 
      * Este método recibe un OutputStream, y un OBJETO(el que sea) y Enviará el
      * OBJETO que haya recibido a través del OutputStream.
      * 
-     * @param outputStream
-     * 
-     * @param OBJECT
-     * 
+     * @param outputStream {OutputStream del Socket o Consola}
+     * @param object - {Objeto que se quiere ENVIAR}
+     * @return boolean - {TRUE(Si la ioperacion salio BIEN) || FALSE(Si la operacion salio mal)}
      */
-    public void writeObject(OutputStream outputStream, Object OBJECT) {
+    public boolean writeObject(OutputStream outputStream, Object object) {
+        return writeObject_p(outputStream, object);      
+    }
+    private boolean writeObject_p(OutputStream outputStream, Object object) {
 
+        boolean state = false;
         ObjectOutputStream writeObject;
 
         try {
 
             writeObject = new ObjectOutputStream(outputStream);
 
-            writeObject.writeObject(OBJECT);
-
+            writeObject.writeObject(object);
+            
+            state = true;
             writeObject.flush();
-
+            
         } catch (NullPointerException npe) {
             String err=("\n[!]ERROR Null Pointer Exception\n--InputStream NULL");
             Logger.getLogger(ReadWriteUtils.class.getName()).severe(err);
@@ -1169,6 +1257,8 @@ public class ReadWriteUtils {
             writeObject = null;
             System.gc();
         }
+        
+        return state;        
     }
 
 
@@ -1184,15 +1274,22 @@ public class ReadWriteUtils {
 /**
 * Envia un OBJETO con el "nombre del archivo" Que Solicita,
 * Se queda a la espera de recibir y descargar el Archivo Solicitado.
-*  
 * 
-* @param outputStream      ==> Flujo por donde enviará(por el OutputStream del Socket) el OBJETO para SOLICITAR EL ARCHIVO
-* @param pathFileRequest   ==> Ruta y Nombre del archivo que se SOLICITA AL SERVIDOR
-* @param inputStream       ==> por el que se recibe(el InputStream del Socket) la Descarga del ARCHIVO Solicitado
-* @param pathFileDownloaded  ==> Ruta y nombre para almacenar archivo descargado.
-* @return state            ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+* Crea un OBJETO, el cual SOLO contiene el Nombre(con la ruta) del Archivo 
+* que quiere DESCARGAR, y se lo envia al SERVIDOR.
+* Posteriormente se queda a la espera de que el servidor comienze a mandar el 
+* Fichero en su totalidad.
+*  
+* @param outputStream {Flujo por donde enviará(por el OutputStream del Socket) el OBJETO para SOLICITAR EL ARCHIVO}
+* @param pathFileRequest {Ruta y Nombre del archivo que se SOLICITA AL SERVIDOR}
+* @param inputStream {Por el que se recibe(el InputStream del Socket) la Descarga del ARCHIVO Solicitado}
+* @param pathFileDownloaded {Ruta y nombre para almacenar archivo descargado.}
+* @return boolean - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
 **/
     public boolean requestAndDownloadFile(OutputStream outputStream, String pathFileRequest, InputStream inputStream, String pathFileDownloaded){
+        return requestAndDownloadFile_p(outputStream, pathFileRequest, inputStream, pathFileDownloaded);
+    }
+    private boolean requestAndDownloadFile_p(OutputStream outputStream, String pathFileRequest, InputStream inputStream, String pathFileDownloaded){
         
         boolean state= false;
         try {
@@ -1253,17 +1350,23 @@ public class ReadWriteUtils {
     }
     
 //******************************************************************************
-     
-     
     /**
      * Envia el fichero indicado a traves del ObjectOutputStream indicado.
      * 
-     * @param inputStream por el que se recibe el objeto(el InputStream del Socket del Cliente), que contiene el nombre del ARCHIVO Solicitado
-     * @param outputStream por el que enviar el fichero (el OutputStream del Socket del Cliente)
+     * RECIBE del CLIENTE un OBJETO, el cual SOLO contiene el Nombre(con la ruta) del Archivo 
+     * que quiere DESCARGAR.
+     * Procesa el objeto y extrae la Ruta y Nombre del fichero.
+     * Posteriormente comienza a transferir el Fichero.
+     * 
+     * @param inputStream {"Canal" Por donde se RECIBE el OBJETO del CLIENTE}
+     * @param outputStream {"Canal" que enviara el FICHERO solicitado al CLIENTE}
      *
-     * @return state      ==> TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)
+     * @return state - {TRUE(Si la ioperacion salio BIEN); FALSE(Si la operacion salio mal)}
      */
     public boolean sendRequestedFile(InputStream inputStream, OutputStream outputStream) {
+        return sendRequestedFile_p(inputStream, outputStream);     
+    }
+    private boolean sendRequestedFile_p(InputStream inputStream, OutputStream outputStream) {
         
         boolean state = false;
         try {
